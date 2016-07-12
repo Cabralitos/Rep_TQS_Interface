@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+ 
+    <ui:composition>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar">
+                    <ui:include src="leftMenu.xhtml" />
+                </div>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">                                          
+                    <h1 class="page-header "> <i class="fa fa-tachometer"></i> Dashboard</h1>
+                    <h:dataTable value="#{indexBean.allMembers}" var="m">
+                    <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Username"/>
+                      </f:facet>
+                      <h:outputText value="#{m.username}"/>
+                    </h:column>
+                    <h:column>
+                      <f:facet name="header">
+                        <h:outputText value="Password"/>
+                      </f:facet>
+                      <h:outputText value="#{m.password}"/>
+                    </h:column>
+                  </h:dataTable>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</html>
+ 
+
+

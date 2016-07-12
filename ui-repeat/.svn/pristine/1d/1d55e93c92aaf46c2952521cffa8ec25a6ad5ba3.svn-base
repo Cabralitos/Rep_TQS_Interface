@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />		
+ 
+            <title>tListClient</title>
+        </f:facet>
+ 
+        <f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+            <h:outputStylesheet name="css/landing-page.css" />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+            
+            <h:outputScript name="resources/bootstrap/js/bootstrap.js" />
+        </f:facet>
+        
+        <f:facet name="last">
+            <h:outputStylesheet name="font-awesome/css/font-awesome.css" />
+        </f:facet>
+    </h:head>
+    <h:body>
+        
+        <ui:include src="header.xhtml" />
+        <ui:include src="content.xhtml" /> 
+        
+      <!--  <h1>tLISTClient</h1>
+        <h2>Example 1</h2>
+        <p>
+           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        </p>
+        <h:outputText value="#{indexBean.allMembers}"/>
+        
+    <h1>Membros do Sistema</h1>
+    <h:outputText value=""/>
+    <h:dataTable value="#{indexBean.allMembers}" var="m">
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="MemberId"/>
+        </f:facet>
+        <h:outputText value="#{m.memberid}"/>
+      </h:column>
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Username"/>
+        </f:facet>
+        <h:outputText value="#{m.username}"/>
+      </h:column>
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Password"/>
+        </f:facet>
+        <h:outputText value="#{m.password}"/>
+      </h:column>
+    </h:dataTable>
+    
+      <ui:param name="max" value="5"/>
+        <table>
+            <ui:repeat var="i" size="#{max}" value="#{indexBean.values}">
+                <tr>
+                    <td>
+                        #{i}
+                    </td>
+                </tr>
+            </ui:repeat>
+        </table>-->
+        
+        
+    </h:body>
+</html>
+

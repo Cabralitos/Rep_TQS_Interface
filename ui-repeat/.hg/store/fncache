@@ -1,0 +1,9 @@
+data/src/main/webapp/index.xhtml.i
+data/src/main/java/com/bluelotussoftware/example/jsf/IndexBean.java.i
+data/src/main/webapp/WEB-INF/weblogic.xml.i
+data/pom.xml.i
+data/.hgignore.i
+data/src/main/webapp/META-INF/context.xml.i
+data/src/main/webapp/WEB-INF/web.xml.i
+data/src/main/webapp/WEB-INF/glassfish-web.xml.i
+data/nb-configuration.xml.i

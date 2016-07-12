@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <ui:composition template="templates/common.xhtml">
+
+        <ui:define name="content">
+
+            <div class='container'>
+                <h3> <i class="fa fa-tasks"> </i> Tarefas</h3>
+                <h:link value="[Criar Adicionar]" outcome="createTask" />
+                <hr></hr>
+                <p>Fazer a gestão de tarefas</p>
+                <div class='panel panel-default'>
+                    <div class='panel-heading'>Tarefas</div>
+                    <div class='panel-body'>      
+                        <h:dataTable value="#{taskBean.allTask}" var="m" class='table table-striped'>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Categoria"/>
+                                    </f:facet>
+                                    <span class='label label-primary'><i class="fa fa-tags"> </i><h:outputText value="#{m.idcategory}"/></span>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data Fim"/>
+                                    </f:facet>
+                                    <h:outputText value="#{m.duedate}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    
+                                    <span class='label label-danger'><h:outputText value="Em aberto" rendered="#{m.complete eq 0}" /></span>
+                                    <span class='label label-success'><h:outputText value="Fechada" rendered="#{m.complete eq 1}" /></span>
+
+                                </h:column>
+                                <h:column>
+                                    <h:form id="list"> 
+                                    <f:facet name="header">
+                                        <h:outputText value="Prioridade"/>
+                                    </f:facet>
+                                    <h:commandButton value="-" id="menos" action="#{taskBean.setMenos()}">
+                                        <f:param name="idtask" value="#{m.idtask}" />
+                                        <f:param name="idpriority" value="#{m.idpriority}" />
+                                    </h:commandButton>
+                                    
+                                    <span class='label label-success'><h:outputText value="Baixa" rendered="#{m.idpriority eq 1}" /></span>
+                                    <span class='label label-warning'><h:outputText value="Média" rendered="#{m.idpriority eq 2}" /></span>
+                                    <span class='label label-danger'><h:outputText value="Alta" rendered="#{m.idpriority eq 3}" /></span>
+                                                                   
+                                    <h:commandButton value="+" id="mais" action="#{taskBean.setMais()}">
+                                        <f:param name="idtask" value="#{m.idtask}" />
+                                        <f:param name="idpriority" value="#{m.idpriority}" />
+                                    </h:commandButton>
+                                    </h:form>
+
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Descrição"/>
+                                    </f:facet>
+                                    <h:outputText value="#{m.description}"/>
+                                </h:column>
+                                <h:column>
+                                   
+                                    <f:facet name="header">
+                                        <h:outputText value="Alterar Estado"/>
+                                    </f:facet>
+                                     <h:form> 
+                                   <h:commandButton value="Alterar" action="#{taskBean.setState()}">
+                                        <f:param name="idtask" value="#{m.idtask}" />
+                                        <f:param name="complete" value="#{m.complete}" />
+                                    </h:commandButton></h:form>
+                                </h:column>
+                                    
+                            </h:dataTable>
+                            <h:outputLabel value=""></h:outputLabel>
+    
+                        <h:outputText value="Niveis de Prioridade"/>
+                        <span class='label label-danger'><h:outputText value="3 - Alta"/></span>
+                        <span class='label label-warning'><h:outputText value="2 - Média"/></span>
+                        <span class='label label-success'><h:outputText value="1 - Baixa"/></span>
+                        <span></span>
+
+                    </div>
+                </div>
+            </div> 
+        </ui:define>
+    </ui:composition>
+</html>
+

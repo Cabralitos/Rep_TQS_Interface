@@ -1,0 +1,4 @@
+[paths]
+default = http://jyeary@banyan.local:8080/mercurial/cgi-bin/hgweb.cgi/ui-repeat/
+default-push = http://jyeary@banyan.local:8080/mercurial/cgi-bin/hgweb.cgi/ui-repeat/
+

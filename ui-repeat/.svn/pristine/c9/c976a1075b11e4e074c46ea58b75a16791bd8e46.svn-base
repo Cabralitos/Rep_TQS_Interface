@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+    <ui:composition template="templates/common.xhtml">
+        
+        <ui:define name="content">
+           <div class='container'>
+            <h2>Adicionar nova tarefa</h2>
+            <h:form id="createTask">
+            <table>
+                <tr>
+                    <td><h:outputText value="Descrição" /></td>
+                    <td><h:inputText id="description"
+                            required="true" requiredMessage="Please enter your first name" class='form-control'/></td>
+                    <td><h:message for="description" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><br></br></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Data de Fim" /></td>
+                    <td><h:inputText id="duedate"
+                            required="true" requiredMessage="Please enter your last name" class='form-control'/></td>
+                    <td><h:message for="duedate" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><br></br></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Prioridade" /></td>
+                    <td>
+                        
+                        <h:selectOneRadio>
+                            <f:selectItem itemValue="3"><span class='label label-danger'>3 - Alta Prioridade</span> </f:selectItem> <br></br>
+                            <f:selectItem itemValue="2"><span class='label label-warning'>2 - Media Prioridade</span> </f:selectItem><br></br>
+                            <f:selectItem itemValue="1"><span class='label label-info'>1 - Baixa Prioridade</span> </f:selectItem><br></br>
+                        </h:selectOneRadio>                          
+                        
+                    </td>
+                    <td><h:message for="email" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><br></br></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Categorias" /></td>
+                    <td>
+                        
+                        <h:selectOneMenu>
+                            <f:selectItem itemValue="Trabalho" itemLabel="Trabalho"/>
+                            <f:selectItem itemValue="Pessoal" itemLabel="Pessoal" />
+                    </h:selectOneMenu>
+                        
+                    </td>
+                    <td><h:message for="psw" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><br></br></td>
+                </tr>
+                <tr>
+                    <td><h:outputText value="Tags" /></td>
+                    <td><h:inputText id="tags"
+                            required="true" requiredMessage="Please enter your last name" class='form-control'/></td>
+                    <td><h:message for="tags" style="color:red" /></td>
+                </tr>
+                <tr>
+                    <td><br></br></td>
+                </tr>
+                <tr>
+                    <td />
+                    <td><h:commandButton value="Registar" action="#{TaskBean.createTask()}"/></td>
+                </tr>
+
+            </table>
+        </h:form>
+        </div> 
+        </ui:define>
+        
+    </ui:composition>
+</html>
+

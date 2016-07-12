@@ -1,0 +1,133 @@
+/*
+ * Copyright 2012 Blue Lotus Software, LLC.
+ * Copyright 2012 John Yeary.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+/*
+ * $Id: IndexBean.java,v 68733b7fc846 2012/07/03 02:51:48 jyeary $
+ */
+package com.mycompany.jsf;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mycompany.model.Task;
+import com.sun.jersey.api.client.ClientResponse;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Page backing bean used to provide sample values for the &lt;ui:repeat/&gt;
+ * components on the index.xhtml page.
+ *
+ * @author John Yeary <jyeary@bluelotussoftware.com>
+ * @version 1.0
+ */
+@ManagedBean
+public class TaskBean {
+
+    /**
+     * Generates a list of 10 values from 0-9.
+     *
+     * @return a list of values from 0-9.
+     */
+    public List<Integer> getValues() {
+        List<Integer> values = new ArrayList<Integer>();
+        for (int i = 0; i < 10; i++) {
+            values.add(i);
+        }
+        return values;
+    }
+
+    /**
+     * Return a list of row numbers from 0 to the maximum value provided.
+     *
+     * @param max the maximum size of the list of returned values.
+     * @return a list of values starting from 0 to {@code max}.
+     */
+    public List<Integer> rowNumbers(final int max) {
+        List<Integer> values = new ArrayList<Integer>();
+        for (int i = 0; i < max; i++) {
+            values.add(i);
+        }
+        return values;
+    }
+    
+    public List<Task> getAllTask() {
+        Client c = Client.create();
+        WebResource wr = c.resource("http://localhost:8080/tLISTService/webresources/TaskService/getAllTasksByMember/1");
+        String json =  wr.get(String.class);
+        Gson gson = new Gson();
+        return gson.fromJson(json, new TypeToken<List<Task>>(){}.getType());
+  }
+    
+    public String createTask(){
+        Client c = Client.create();
+        WebResource wr = c.resource("http://localhost:8080/tLISTService/webresources/TaskService/createTask");
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        
+        String description = request.getParameter("createTask:description");
+        String duedate = request.getParameter("createTask:duedate");
+        String tags = request.getParameter("createTask:tags");
+        
+        String[] parts = tags.split(",");
+        
+        String input = "{\"description\":\"" + description + "\",\"duedate\":\"" + duedate +" \"}";
+
+        ClientResponse response = wr.type("application/json")
+           .post(ClientResponse.class, input);
+
+        if (response.getStatus() != 201) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                     + response.getStatus());
+        }
+
+        System.out.println("Output from Server .... \n");
+        String output = response.getEntity(String.class);
+        
+        //createTags(parts, output);
+        
+        return output;
+        
+    }
+    
+    private void createTags(String[] parts, int idcategory)
+    {
+        Client c = Client.create();
+        WebResource wr = c.resource("http://localhost:8080/tLISTService/webresources/TagService/createTag");
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        
+        
+        for(int i=0;i<parts.length;i++)
+        {
+            String input = "{\"name\":\"" + parts[i] +" \"}";
+
+            ClientResponse response = wr.type("application/json")
+               .post(ClientResponse.class, input);
+
+            if (response.getStatus() != 201) {
+                    throw new RuntimeException("Failed : HTTP error code : "
+                         + response.getStatus());
+            }
+        }
+    }
+    
+    
+}

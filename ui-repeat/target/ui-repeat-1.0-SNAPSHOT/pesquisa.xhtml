@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+        <ui:composition template="templates/common.xhtml">
+            <ui:define name="content">
+                
+                <div class='container'>
+                <h2> <i class="fa fa-search"> </i> Pesquisa Por Categoria</h2>
+                <h:form id="pesquisaForm">
+            <table>
+                <tr>
+                    <td><h:outputText value="Pesquisa" /></td>
+                    <td><h:inputText id="pesquisa"
+                            required="true" requiredMessage="Please enter your email id" class='form-control'/></td>
+                    <td><h:message for="username" style="color:red" /></td>
+                </tr>
+                 <tr>
+                    <td />
+                    <td><h:commandButton value="Pesquisar" action="#{taskBean.pesquisar()}"/></td>
+                </tr>
+            </table>
+                    <hr></hr>
+
+                      <h3>Resultados</h3>
+                    <h:dataTable value="#{taskBean.pesquisa}" var="m" class='table table-striped'>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Categoria"/>
+                        </f:facet>
+                        <span class='label label-primary'><h:outputText value="#{m.idcategory}"/></span>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Fim"/>
+                        </f:facet>
+                        <h:outputText value="#{m.duedate}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Estado"/>
+                        </f:facet>
+                            <span class='label label-danger'><h:outputText value="Em aberto" rendered="#{m.complete eq 0}" /></span>
+                            <span class='label label-success'><h:outputText value="Fechada" rendered="#{m.complete eq 1}" /></span>
+
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Prioridade"/>
+                        </f:facet>
+
+                        <span class='label label-success'><h:outputText value="Baixa" rendered="#{m.idpriority eq 1}" /></span>
+                                    <span class='label label-warning'><h:outputText value="Média" rendered="#{m.idpriority eq 2}" /></span>
+                                    <span class='label label-danger'><h:outputText value="Alta" rendered="#{m.idpriority eq 3}" /></span>
+                                                          
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descrição"/>
+                        </f:facet>
+                        <h:outputText value="#{m.description}"/>
+                    </h:column>
+                </h:dataTable>
+                <h:outputLabel value=""></h:outputLabel>
+
+            </h:form>
+            <h:outputText value="Niveis de Prioridade"/>
+            <span class='label label-danger'><h:outputText value="3 - Alta"/></span>
+            <span class='label label-warning'><h:outputText value="2 - Média"/></span>
+            <span class='label label-success'><h:outputText value="1 - Baixa"/></span>
+
+            
+            </div>
+            </ui:define>
+        </ui:composition>
+           </h:body>
+</html>
+
